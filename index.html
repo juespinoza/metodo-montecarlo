@@ -1,310 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Método de Montecarlo: Integrales Definidas</title>
 
     <style type="text/css">
-        h1 {
-            color: #6B705C;
-            text-align: center;
-        }
+      h1 {
+        color: #6b705c;
+        text-align: center;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 20px 20px 20px 20px
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 20px 20px 20px 20px;
+      }
 
-        input {
-            border-radius: 5px;
-            border-color: #CB997E;
-        }
+      input {
+        border-radius: 5px;
+        border-color: #cb997e;
+      }
 
-        button {
-            border-radius: 5px;
-            border-style: none;
-            background-color: #6B705C;
-            color: antiquewhite;
-            height: 42px;
-            width: 144px;
-            font-size: medium;
-        }
+      button {
+        border-radius: 5px;
+        border-style: none;
+        background-color: #6b705c;
+        color: antiquewhite;
+        height: 42px;
+        width: 144px;
+        font-size: medium;
+      }
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
 
-        .row {
-            display: flex;
-        }
+      .row {
+        display: flex;
+      }
 
-        .column {
-            float: left;
-            width: 50%;
-            padding: 10px;
-            height: 300px;
-        }
+      .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        height: 300px;
+      }
 
-        .footer {
-            width: 100%;
-            height: 100px;
-            background-color: #CB997E;
-            left: 0;
-            bottom: 0;
-            text-align: center;
-            font-size: small;
-        }
+      .footer {
+        width: 100%;
+        height: 100px;
+        background-color: #cb997e;
+        left: 0;
+        bottom: 0;
+        text-align: center;
+        font-size: small;
+      }
 
-        .header {
-            width: 100%;
-            height: 100px;
-            background-color: #CB997E;
-        }
+      .header {
+        width: 100%;
+        height: 100px;
+        background-color: #cb997e;
+      }
     </style>
 
     <!-- Math.js file -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.3.0/math.js"></script>
 
     <!-- Plotly.js file -->
-    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.18/chance.min.js"></script>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <!-- Header -->
     <div class="header">
-        <img src="./UADELOGO.png" alt="">
+      <img src="./UADELOGO.png" alt="" />
     </div>
 
     <!-- Title -->
-    <h1>Estimación de Integrales Definidas mediante el Método de Monte Carlo</h1>
+    <h1>
+      Estimación de Integrales Definidas mediante el Método de Monte Carlo
+    </h1>
 
     <!-- Instrucciones -->
-    <p>En este aplicativo nos permitirá calcular integrales definidas por el Método de Monte Carlo.</p>
-    <p>Para ello, primero complete los siguientes campos obligatorios, teniendo en cuenta que los campos que se piden
-        son los mostrados en el gráfico del lado derecho.</p>
+    <p>
+      En este aplicativo nos permitirá calcular integrales definidas por el
+      Método de Monte Carlo.
+    </p>
+    <p>
+      Para ello, primero complete los siguientes campos obligatorios, teniendo
+      en cuenta que los campos que se piden son los mostrados en el gráfico del
+      lado derecho.
+    </p>
     <div class="row">
-        <div class="column" style="background-color: #FFE8D6;">
-            <form id="form">
-                <label for="funcion">f(x) = </label>
-                <input type="text" id="funcion" name="funcion"><br><br>
-                <label for="a">a = </label>
-                <input type="text" id="a" name="a"><br><br>
-                <label for="b">b = </label>
-                <input type="text" id="b" name="b"><br><br>
-                <label for="disparos">Cantidad de puntos a disparar = </label>
-                <input type="text" id="disparos" name="disparos"><br><br>
-                <input type="submit" value="Calcular" />
-            </form>
-        </div>
-        <div class="column">
-            <img src="./Integral definida.png" alt="">
-        </div>
+      <div class="column" style="background-color: #ffe8d6">
+        <form id="form">
+          <label for="funcion">f(x) = </label>
+          <input type="text" id="funcion" name="funcion" /><br /><br />
+          <label for="a">a = </label>
+          <input type="text" id="a" name="a" /><br /><br />
+          <label for="b">b = </label>
+          <input type="text" id="b" name="b" /><br /><br />
+          <label for="disparos">Cantidad de puntos a disparar = </label>
+          <input type="text" id="disparos" name="disparos" /><br /><br />
+          <input type="submit" value="Calcular" />
+        </form>
+      </div>
+      <div class="column">
+        <img src="./Integral definida.png" alt="" />
+      </div>
     </div>
 
     <!-- Algoritmo de Monte Carlo -->
-    <div id='myDiv'>
-        <script type="text/javascript">
-            window.onload = function () {
-                //Definimos una función para generar los puntos aleatorios que se dispararán (teniendo en cuenta los límites del rectangulo)
-                function generarPuntoAleatorio(min, max) {
-                    random = parseFloat(Math.random() * (max - min) + min).toFixed(4);
-                    
-                    return random;
-                }
+    <div id="myDiv">
+      <script type="text/javascript">
+        window.onload = function () {
+          //Definimos una función para generar los puntos aleatorios que se dispararán (teniendo en cuenta los límites del rectangulo)
+          function generarPuntoAleatorio(min, max) {
+            random = parseFloat(Math.random() * (max - min) + min).toFixed(4);
 
-                //Definimos el Algoritmo de Newton-Rapson
-                function newtonraphson(funcion, funcionDerivada, valorInicial) {
-                    var tolerancia = 1e-7;
-                    var epsilon = 2.220446049250313e-16;
-                    var maxCount = 20;
-                    var count = 0;
-                    var raiz;
+            return random;
+          }
 
-                    while (count++ < maxCount) {
-                        imagenFuncionEnValorInicial = math.evaluate(funcion, { x: valorInicial }).toString();
-                        imagenFuncionDerivadaEnValorInicial = math.evaluate(funcionDerivada, { x: valorInicial }).toString();
+          //Definimos el Algoritmo de Newton-Rapson
+          function newtonraphson(funcion, funcionDerivada, valorInicial) {
+            var tolerancia = 1e-7;
+            var epsilon = 2.220446049250313e-16;
+            var maxCount = 20;
+            var count = 0;
+            var raiz;
 
-                        if (Math.abs(imagenFuncionDerivadaEnValorInicial) <= epsilon * Math.abs(imagenFuncionEnValorInicial)) {
-                            console.log('Not Convergent')
-                            return false;
-                        }
+            while (count++ < maxCount) {
+              imagenFuncionEnValorInicial = math
+                .evaluate(funcion, { x: valorInicial })
+                .toString();
+              imagenFuncionDerivadaEnValorInicial = math
+                .evaluate(funcionDerivada, { x: valorInicial })
+                .toString();
 
-                        raiz = valorInicial - imagenFuncionEnValorInicial / imagenFuncionDerivadaEnValorInicial;
+              if (
+                Math.abs(imagenFuncionDerivadaEnValorInicial) <=
+                epsilon * Math.abs(imagenFuncionEnValorInicial)
+              ) {
+                console.log("Not Convergent");
+                return false;
+              }
 
-                        if (Math.abs(raiz - valorInicial) <= tolerancia * Math.abs(raiz)) {
-                            return Math.round(raiz * 100.0) / 100.0;
-                        }
+              raiz =
+                valorInicial -
+                imagenFuncionEnValorInicial /
+                  imagenFuncionDerivadaEnValorInicial;
 
-                        valorInicial = raiz;
-                    }
-                    return false;
-                }
+              if (
+                Math.abs(raiz - valorInicial) <=
+                tolerancia * Math.abs(raiz)
+              ) {
+                return Math.round(raiz * 100.0) / 100.0;
+              }
 
-                //Cálculamos Máx y Mín
-                function calcularMaxMin(a,b,funcion) {
-                    //Definimos el valor N* de la ecuación Xk = a + (k(b-a))/N*
-                     let n = (b-a) * 10
-                    //hallamos las Xk y las guardamos en un vector
-                    
-                    let vector =new Array(n).map((value,k)=>{
-                        return  (a + (( k * (b-a))) / n)
-                    }) 
-                    //Con los valores XK, calculamos los valores de F(xk)
-                    let valores= vector.map((valor)=>{math.evaluate(funcion, { x: valor }).toString();})
+              valorInicial = raiz;
+            }
+            return false;
+          }
 
-                  //Definimos los valores Max y Min del rectángulo
-                   let valormax =  Math.max.apply(Math, valores);
-                   let valormin =  Math.min.apply(Math, valores);
+          //Cálculamos Máx y Mín
+          function calcularMaxMin(a, b, funcion) {
+            //Definimos el valor N* de la ecuación Xk = a + (k(b-a))/N*
+            let n = (b - a) * 10;
+            //hallamos las Xk y las guardamos en un vector
 
-                   if (valormax >= 0) {
-                       valormax = 1.1 * valormax
-                    } else {
-                        valormax = 0.9 * valormax
-                    }
-                    if (valormin >= 0) {
-                       valormin = 0.9 * valormin
-                    } else {
-                        valormin = 1.1 * valormin
-                    }                   
-                      
-                 return [valormax,valormin]
-                    
-                }
+            let vector = new Array(n).fill(undefined).map((value, k) => {
+              return parseFloat(a) + k * ((parseFloat(b) - parseFloat(a)) / n);
+            });
+            //Con los valores XK, calculamos los valores de F(xk)
+            let valores = vector.map((valor) => {
+              return math.evaluate(funcion, { x: valor }).toString();
+            });
 
-                //Definimos una función para tomar los valores que ingreso el usuario y realizamos el método de Monte Carlo
-                function montecarlo() {
-                    let y = document.getElementById("funcion").value;
-                    let a = document.getElementById("a").value;
-                    let b = document.getElementById("b").value;
-                    let disparos = document.getElementById("disparos").value;
+            //Definimos los valores Max y Min del rectángulo
+            let valormax = Math.max.apply(Math, valores);
+            let valormin = Math.min.apply(Math, valores);
 
-                    //PASO 2 
-                    //Definimos el límite superior e inferior de nuestro rectangulo aplicando el Algoritmo de Newton-Raphson
-                    let ymin;
-                    let ymax;
-                    let raices = [];
-                    let max = [];
-                    let min = [];
+            if (valormax >= 0) {
+              valormax = 1.1 * valormax;
+            } else {
+              valormax = 0;
+            }
+            if (valormin >= 0) {
+              valormin = 0;
+            } else {
+              valormin = 1.1 * valormin;
+            }
 
-                    // Definimos el máx y mín del rectangulo
-                     ymax,ymin = calcularMaxMin(a,b,funcion);
+            return [valormax, valormin];
+          }
 
-                    //PASO 3 
-                    //Calculamos el área del rectangulo
-                    let areaRectangulo = (parseFloat(b) - parseFloat(a)) * (parseFloat(ymax) - parseFloat(ymin));
+          //Definimos una función para tomar los valores que ingreso el usuario y realizamos el método de Monte Carlo
+          function montecarlo() {
+            let y = document.getElementById("funcion").value;
+            let a = document.getElementById("a").value;
+            let b = document.getElementById("b").value;
+            let disparos = document.getElementById("disparos").value;
 
-                    //PASO 4 
-                    //Definimos los contadores de los disparos totales y los disparos en el área definida
-                    let disparosTotales = 0;
-                    let disparosEnArea = 0;
+            //PASO 2
+            //Definimos el límite superior e inferior de nuestro rectangulo aplicando el Algoritmo de Newton-Raphson
+            let ymax;
+            let ymin;
+            let raices = [];
+            let max = [];
+            let min = [];
 
-                    //Definimos los arrays de puntos aleatorios
-                    let puntosX = [];
-                    let puntosY = [];
+            // Definimos el máx y mín del rectangulo
+            let maxMin = calcularMaxMin(a, b, y);
+            ymax = maxMin[0];
+            ymin = maxMin[1];
 
-                    //Definimos un ciclo para cada disparo
-                    while (disparosTotales < disparos) {
-                        let puntoX = generarPuntoAleatorio(parseFloat(a), parseFloat(b));
-                        let puntoY = generarPuntoAleatorio(parseFloat(ymin), parseFloat(ymax));
+            //PASO 3
+            //Calculamos el área del rectangulo
+            let areaRectangulo =
+              (parseFloat(b) - parseFloat(a)) *
+              (parseFloat(ymax) - parseFloat(ymin));
 
-                        if ((parseFloat(math.evaluate(y, { x: parseFloat(puntoX) }).toString()) > parseFloat(puntoY) && parseFloat(puntoY) > 0)) {
-                            disparosEnArea++;
-                        }
+            //PASO 4
+            //Definimos los contadores de los disparos totales y los disparos en el área definida
+            let disparosTotales = 0;
+            let disparosEnArea = 0;
 
-                        if ((parseFloat(math.evaluate(y, { x: parseFloat(puntoX) }).toString()) < parseFloat(puntoY) && parseFloat(puntoY) < 0)) {
-                            disparosEnArea--;
-                        }
+            //Definimos los arrays de puntos aleatorios
+            let puntosX = [];
+            let puntosY = [];
 
-                        puntosX.push(puntoX);
-                        puntosY.push(puntoY);
+            //Definimos un ciclo para cada disparo
+            while (disparosTotales < disparos) {
+              let puntoX = generarPuntoAleatorio(parseFloat(a), parseFloat(b));
+              let puntoY = generarPuntoAleatorio(
+                parseFloat(ymin),
+                parseFloat(ymax)
+              );
 
-                        disparosTotales++;
-                    }
+              if (
+                parseFloat(
+                  math.evaluate(y, { x: parseFloat(puntoX) }).toString()
+                ) > parseFloat(puntoY) &&
+                parseFloat(puntoY) > 0
+              ) {
+                disparosEnArea++;
+              }
 
-                
-                    //Realizamos una funcion para obtener el valor de la integral
-                    function getMonteCarlo() {
-                        let estimacionIntegral = (parseFloat(disparosEnArea) / disparosTotales) * parseFloat(areaRectangulo);
-                        return estimacionIntegral;
-                    }
+              if (
+                parseFloat(
+                  math.evaluate(y, { x: parseFloat(puntoX) }).toString()
+                ) < parseFloat(puntoY) &&
+                parseFloat(puntoY) < 0
+              ) {
+                disparosEnArea--;
+              }
 
-                    //Realizamos el gráfico de la solución
-                    var layout = {
-                        shapes: [
-                            {
-                                type: 'rect',
-                                x0: a,
-                                y0: ymin,
-                                x1: b,
-                                y1: ymax,
-                                line: {
-                                    color: 'rgba(255, 99, 71, 1)',
-                                    width: 2
-                                },
-                                fillcolor: 'rgba(255, 99, 71, 0.1)'
-                            }
-                        ]
-                    }
+              puntosX.push(puntoX);
+              puntosY.push(puntoY);
 
-                    const exprFuncion = math.compile(y)
-                    const xValuesFuncion = math.range(a, b, 0.1, true).toArray();
-                    const yValuesFuncion = xValuesFuncion.map(function (x) {
-                        return exprFuncion.evaluate({ x: x })
-                    })
+              disparosTotales++;
+            }
 
-                    var funcion = {
-                        x: xValuesFuncion,
-                        y: yValuesFuncion,
-                        mode: 'lines',
-                        fill: 'tozeroy',
-                        type: 'scatter',
-                        name: 'f(x)'
-                    };
+            //Realizamos una funcion para obtener el valor de la integral
+            function getMonteCarlo() {
+              let estimacionIntegral =
+                (parseFloat(disparosEnArea) / disparosTotales) *
+                parseFloat(areaRectangulo);
+              return estimacionIntegral;
+            }
 
-                    var puntos = {
-                        x: puntosX,
-                        y: puntosY,
-                        mode: 'markers',
-                        type: 'scatter',
-                        name: 'puntos'
-                    };
-
-                    var data = [funcion, puntos];
-
-                    Plotly.newPlot('myDiv', data, layout);
-                    document.getElementById('area').innerHTML = getMonteCarlo();
-                }
-
-
-                //Actualizamos el gráfico cada vez que el usuario presiona el botón "Calcular"
-                document.getElementById('form').onsubmit = function (event) {
-                    event.preventDefault()
-                    montecarlo()
-                }
-
-                //Realizamos el Método de Monte Carlo
-                montecarlo();
+            //Realizamos el gráfico de la solución
+            var layout = {
+              shapes: [
+                {
+                  type: "rect",
+                  x0: a,
+                  y0: ymin,
+                  x1: b,
+                  y1: ymax,
+                  line: {
+                    color: "rgba(255, 99, 71, 1)",
+                    width: 2,
+                  },
+                  fillcolor: "rgba(255, 99, 71, 0.1)",
+                },
+              ],
             };
-        </script>
+
+            const exprFuncion = math.compile(y);
+            const xValuesFuncion = math.range(a, b, 0.1, true).toArray();
+            const yValuesFuncion = xValuesFuncion.map(function (x) {
+              return exprFuncion.evaluate({ x: x });
+            });
+
+            var funcion = {
+              x: xValuesFuncion,
+              y: yValuesFuncion,
+              mode: "lines",
+              fill: "tozeroy",
+              type: "scatter",
+              name: "f(x)",
+            };
+
+            var puntos = {
+              x: puntosX,
+              y: puntosY,
+              mode: "markers",
+              type: "scatter",
+              name: "puntos",
+            };
+
+            var data = [funcion, puntos];
+
+            Plotly.newPlot("myDiv", data, layout);
+            document.getElementById("area").innerHTML = getMonteCarlo();
+          }
+
+          //Actualizamos el gráfico cada vez que el usuario presiona el botón "Calcular"
+          document.getElementById("form").onsubmit = function (event) {
+            event.preventDefault();
+            montecarlo();
+          };
+
+          //Realizamos el Método de Monte Carlo
+          montecarlo();
+        };
+      </script>
     </div>
 
-    <p>La estimación de la integral definida por el método de Monte Carlo es de <span id="area"></span>
+    <p>
+      La estimación de la integral definida por el método de Monte Carlo es de
+      <span id="area"></span>
     </p>
 
     <!-- Footer -->
     <div class="footer">
-        <p style="padding-top: 10px;"><b>Materia:</b> Modelado y Simulación</p>
-        <p><b>Profesor:</b> Acero, Fernando Rodolfo</p>
-        <p><b>Grupo:</b> Carmuega, Lucía y Pomerantz, Macarena Agostina</p>
+      <p style="padding-top: 10px"><b>Materia:</b> Modelado y Simulación</p>
+      <p><b>Profesor:</b> Acero, Fernando Rodolfo</p>
+      <p><b>Grupo:</b> Carmuega, Lucía y Pomerantz, Macarena Agostina</p>
     </div>
-</body>
-
+  </body>
 </html>
