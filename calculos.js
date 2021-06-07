@@ -76,7 +76,7 @@ window.onload = function () {
       ymax = maxMin[0];
       ymin = maxMin[1];
       document.getElementById("ptoMax").innerHTML = ymax;
-      document.getElementById("ptoMin").innerHTML = ymax;
+      document.getElementById("ptoMin").innerHTML = ymin;
 
       // PASO 3: calcular el área del rectángulo tomando los límites de cada eje (a, b, ymin, ymax)
       let areaRectangulo =
