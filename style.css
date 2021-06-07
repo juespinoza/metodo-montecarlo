@@ -2,52 +2,74 @@ h1 {
   color: #000;
   text-align: center;
 }
+h3 {
+  border-bottom: 1px solid #666;
+  margin-top: 4rem;
+}
+h4 {
+  color: #777;
+}
 
 body {
   font-family: "Roboto", Tahoma, Geneva, Verdana, sans-serif;
-  margin: 20px 20px 20px 20px;
-  background-color: #ccc;
+  margin: 3rem;
+  background-color: #fff;
+}
+
+label {
+  display: inline-block;
+  width: 9rem;
+  text-align: right;
 }
 
 input {
-  border-radius: 5px;
-  border-color: #cb997e;
+  border-radius: 2px;
 }
 
-button {
-  border-radius: 5px;
+.button {
+  border-radius: 2px;
   border-style: none;
-  background-color: #6b705c;
-  color: antiquewhite;
+  background-color: #41963b;
+  color: #fff;
   height: 42px;
   width: 144px;
   font-size: medium;
+  cursor: pointer;
 }
 
-img {
-  height: 100%;
-  object-fit: contain;
+.button:hover {
+  background-color: #5ca832;
+}
+
+.submit {
+  margin-left: 5.5rem;
 }
 
 .row {
   display: flex;
+  justify-content: center;
+  text-align: justify;
+  margin: auto;
 }
 
 .column {
   float: left;
   width: 50%;
   padding: 10px;
-  height: 300px;
+  margin: auto;
 }
 
 .footer {
   width: 100%;
-  height: 100px;
   border-top: 5px solid #41963b;
-  left: 0;
-  bottom: 0;
-  text-align: center;
-  font-size: small;
+  margin-top: 2rem;
+}
+
+.info {
+  flex-direction: column;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .header {
@@ -55,4 +77,29 @@ img {
   height: 100px;
   border-bottom: 5px solid #41963b;
   display: flex;
+  justify-content: space-between;
+}
+
+.imagen {
+  text-align: right;
+}
+
+.img {
+  padding: 1rem;
+  border: 1px solid #999;
+}
+
+.js-plotly-plot {
+  border: 1px solid;
+}
+
+.respuesta {
+  font-weight: bold;
+  color: #41963b;
+}
+.showResult {
+  display: block;
+}
+.hideResult {
+  display: none;
 }

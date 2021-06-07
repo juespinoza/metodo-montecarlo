@@ -4,15 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Integrales Definidas con el método Montecarlo</title>
+    <title>Integral definida con el método Montecarlo</title>
     <link rel="stylesheet" href="./style.css" />
-
     <!-- Math.js file -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.3.0/math.js"></script>
-
     <!-- Plotly.js file -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.18/chance.min.js"></script>
   </head>
 
@@ -20,7 +17,7 @@
     <!-- Header -->
     <div class="header">
       <img src="./UADELOGO.png" alt="" />
-      <div>
+      <div class="info">
         <span><b>Trabajo práctico de Modelado y Simulación</b></span>
         <span><b>Profesor:</b> Fernando Rodolfo Acero</span>
         <span><b>Alumnas:</b> Bárbara Cerezo y Julia Espinoza</span>
@@ -30,46 +27,77 @@
     <!-- Title -->
     <h1>Integral Definida mediante el Método Montecarlo.</h1>
 
-    <!-- Instrucciones -->
-    <div class="row">
-      <div class="column">
-        <p>Valores necesarios para el cálculo</p>
-        <img src="./integral_definida_imagen.png" alt="" />
-      </div>
-    </div>
-    <br />
-    <p>
+    <!-- Formulario para ingresar datos-->
+    <h3>
       Paso 1: Ingresar la función, los puntos límites en el eje X, y la cantidad
       de disparos
-    </p>
+    </h3>
     <div class="row">
+      <div class="column imagen">
+        <img class="img" src="./integral_definida_imagen.png" alt="" />
+      </div>
       <div class="column">
         <form id="form">
-          <label for="funcion">f(x) = </label>
-          <input type="text" id="funcion" name="funcion" /><br /><br />
-          <label for="a">a = </label>
-          <input type="text" id="a" name="a" /><br /><br />
-          <label for="b">b = </label>
-          <input type="text" id="b" name="b" /><br /><br />
-          <label for="disparos">Cantidad de puntos a disparar = </label>
-          <input type="text" id="disparos" name="disparos" /><br /><br />
-          <input type="submit" value="Calcular" />
+          <div class="inputs">
+            <label for="funcion"><b>f(x)</b> </label>
+            <input type="text" id="funcion" name="funcion" /><br /><br />
+            <label for="a"><b>a</b> </label>
+            <input type="text" id="a" name="a" /><br /><br />
+            <label for="b"><b>b</b> </label>
+            <input type="text" id="b" name="b" /><br /><br />
+            <label for="disparos"><b>Total de disparos</b> </label>
+            <input type="text" id="disparos" name="disparos" /><br /><br />
+          </div>
+          <div class="submit">
+            <input type="submit" value="Calcular" class="button" />
+          </div>
         </form>
       </div>
     </div>
 
-    <!-- Algoritmo de Monte Carlo -->
-    <div class="row">
-      <div id="myDiv" class="column"></div>
+    <div id="resolucion" class="hideResult">
+      <!-- Puntos Max y Min -->
+      <h3>Paso 2: Calcular los puntos máximo y mínimo de f(x).</h3>
+      <h4>&nbsp;&nbsp;X<sub>k</sub> = a + k ( (b-a) / N* )</h4>
+      <div class="row">
+        Punto máximo de f(x) = &nbsp;<span id="ptoMax"></span>
+      </div>
+      <div class="row">
+        Punto mínimo de f(x) = &nbsp;<span id="ptoMin"></span>
+      </div>
+
+      <!-- Area del rectángulo -->
+      <h3>Paso 3: Calcular el área del rectángulo.</h3>
+      <h4>&nbsp;&nbsp;Area = (b - a) * (yMax - yMin )</h4>
+      <div class="row">
+        Área del rectángulo = &nbsp;<span id="areaRectangulo"></span>
+      </div>
+
+      <!-- Disparos dentro del area -->
+      <h3>Paso 4: Calcular la cantidad de disparos dentro del área.</h3>
+      <div class="row">
+        Disparos dentro del área = &nbsp;<span id="disparosEnArea"></span>
+      </div>
+
+      <!-- Integral aproximada -->
+      <h3>Paso 5: Calcular la estimación de la integral definida.</h3>
+      <h4>
+        &nbsp;&nbsp;Area = [(disparosEnArea / disparosTotal) * (b-a)] * (yMax -
+        yMin)
+      </h4>
+      <div class="row respuesta">
+        Integral definida estimada = &nbsp;<span id="integralDefinida"></span>
+      </div>
+
+      <!-- Gráfico de montecarlo -->
+      <h3>Paso 6: Gráfico del f(x) con los puntos disparados</h3>
+      <div class="row">
+        <div id="montecarloGrafico" class="column"></div>
+      </div>
     </div>
 
-    <h2>
-      La estimación de la integral definida por el método de Monte Carlo es de
-      <span id="area"></span>
-    </h2>
-
     <!-- Footer -->
-    <div class="footer">
+    <div class="footer info">
       <span style="padding-top: 10px"
         ><b>Trabajo práctico de Modelado y Simulación</b></span
       >

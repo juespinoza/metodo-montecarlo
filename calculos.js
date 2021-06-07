@@ -58,7 +58,11 @@ window.onload = function () {
 
   // Función que calcula todos los pasos y construye el grafico de la funcion y los puntos disparados.
   function montecarlo() {
-    if (valoresOk) {
+    document.getElementById("resolucion").classList.remove("showResult");
+    document.getElementById("resolucion").classList.add("hideResult");
+    if (valoresOk()) {
+      document.getElementById("resolucion").classList.remove("hideResult");
+      document.getElementById("resolucion").classList.add("showResult");
       // PASO 1: se leen los datos ingresados por el usuario.
       let y = document.getElementById("funcion").value;
       let a = document.getElementById("a").value;
@@ -71,10 +75,13 @@ window.onload = function () {
       let maxMin = calcularPuntosMaxMin(a, b, y);
       ymax = maxMin[0];
       ymin = maxMin[1];
+      document.getElementById("ptoMax").innerHTML = ymax;
+      document.getElementById("ptoMin").innerHTML = ymax;
 
       // PASO 3: calcular el área del rectángulo tomando los límites de cada eje (a, b, ymin, ymax)
       let areaRectangulo =
         (parseFloat(b) - parseFloat(a)) * (parseFloat(ymax) - parseFloat(ymin));
+      document.getElementById("areaRectangulo").innerHTML = areaRectangulo;
 
       // PASO 4: calcular el valor aproximado de la integral definida
       // Fórmula: (( disparosEnArea / disparosTotal )*(b-a)) * (ymax - ymin)
@@ -136,7 +143,12 @@ window.onload = function () {
         disparosTotales,
         areaRectangulo
       );
-      document.getElementById("area").innerHTML = integralAproximada;
+      document.getElementById(
+        "integralDefinida"
+      ).innerHTML = integralAproximada;
+      document.getElementById("disparosEnArea").innerHTML = disparosEnArea;
+
+      // PASO 5: Graficar
 
       // Límites aumentados para hacer el gráfico
       let xMinLimit = a > 0 ? a * 0.8 : a * 1.2;
@@ -213,7 +225,7 @@ window.onload = function () {
 
       var data = [funcionLinea, puntosEnArea, puntosFueraArea];
 
-      Plotly.newPlot("myDiv", data, layout);
+      Plotly.newPlot("montecarloGrafico", data, layout);
     }
   }
 
