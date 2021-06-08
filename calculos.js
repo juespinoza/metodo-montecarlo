@@ -23,7 +23,7 @@ window.onload = function () {
   // Función para calcular los puntos máximo y mínimo de la función
   // Fórmula: Xk = a + (k(b-a))/N*
   function calcularPuntosMaxMin(a, b, funcion) {
-    let n = (b - a) * 10;
+    let n = parseInt((b - a) * 10);
 
     // Generamos valores para Xk y los guardamos en un vector
     let vectorXk = new Array(n).fill(undefined).map((value, k) => {
