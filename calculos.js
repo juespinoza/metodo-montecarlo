@@ -75,13 +75,13 @@ window.onload = function () {
       let maxMin = calcularPuntosMaxMin(a, b, y);
       ymax = maxMin[0];
       ymin = maxMin[1];
-      document.getElementById("ptoMax").innerHTML = ymax;
-      document.getElementById("ptoMin").innerHTML = ymin;
+      document.getElementById("ptoMax").innerHTML = ymax.toFixed(4);
+      document.getElementById("ptoMin").innerHTML = ymin.toFixed(4);
 
       // PASO 3: calcular el área del rectángulo tomando los límites de cada eje (a, b, ymin, ymax)
       let areaRectangulo =
         (parseFloat(b) - parseFloat(a)) * (parseFloat(ymax) - parseFloat(ymin));
-      document.getElementById("areaRectangulo").innerHTML = areaRectangulo;
+      document.getElementById("areaRectangulo").innerHTML = areaRectangulo.toFixed(4);
 
       // PASO 4: calcular el valor aproximado de la integral definida
       // Fórmula: (( disparosEnArea / disparosTotal )*(b-a)) * (ymax - ymin)
@@ -89,6 +89,8 @@ window.onload = function () {
       // Realizamos los disparos y seteamos los arrays que contienen los puntos adentro y fuera del area
       let disparosTotales = 0;
       let disparosEnArea = 0;
+      let disparosEnAreaPositiva = 0;
+      let disparosEnAreaNegativa = 0;
       let puntosEnX = [];
       let puntosEnY = [];
       let puntosFueraX = [];
@@ -111,6 +113,7 @@ window.onload = function () {
         if (valorFuncionPuntoX > parseFloat(puntoY) && parseFloat(puntoY) > 0) {
           // Si f(x) > y && y > 0 está en el área positiva
           disparosEnArea++;
+          disparosEnAreaPositiva++;
 
           // Se cargan los puntos como puntos en area y se carga el color
           puntosEnX.push(puntoX);
@@ -122,6 +125,7 @@ window.onload = function () {
         ) {
           // Si f(x) > y && y > 0 está en el área negativa
           disparosEnArea--;
+          disparosEnAreaNegativa++;
 
           // Se cargan los puntos como puntos en area y se carga el color
           puntosEnX.push(puntoX);
@@ -136,6 +140,10 @@ window.onload = function () {
 
         disparosTotales++;
       }
+      // Mostramos los disparos en area positiva y negativa
+      document.getElementById("disparosEnAreaPositiva").innerHTML = disparosEnAreaPositiva;
+      document.getElementById("disparosEnAreaNegativa").innerHTML = disparosEnAreaNegativa;
+      document.getElementById("disparosEnArea").innerHTML = disparosEnAreaPositiva + disparosEnAreaNegativa;
 
       // Obtenemos el valor de la integral aproximada para mostrarla
       let integralAproximada = getIntegralAproximadaMontecarlo(
@@ -145,8 +153,7 @@ window.onload = function () {
       );
       document.getElementById(
         "integralDefinida"
-      ).innerHTML = integralAproximada;
-      document.getElementById("disparosEnArea").innerHTML = disparosEnArea;
+      ).innerHTML = integralAproximada.toFixed(4);
 
       // PASO 5: Graficar
 

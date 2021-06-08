@@ -59,25 +59,31 @@
       <!-- Puntos Max y Min -->
       <h3>Paso 2: Calcular los puntos máximo y mínimo de f(x).</h3>
       <h4>&nbsp;&nbsp;X<sub>k</sub> = a + k ( (b-a) / N* )</h4>
-      <div class="row">
-        Punto máximo de f(x) = &nbsp;<span id="ptoMax"></span>
-      </div>
-      <div class="row">
-        Punto mínimo de f(x) = &nbsp;<span id="ptoMin"></span>
-      </div>
+      <p class="row">
+        Punto máximo de f(x) = &nbsp;<span id="ptoMax" class="bold"></span>
+      </p>
+      <p class="row">
+        Punto mínimo de f(x) = &nbsp;<span id="ptoMin" class="bold"></span>
+      </p>
 
       <!-- Area del rectángulo -->
       <h3>Paso 3: Calcular el área del rectángulo.</h3>
       <h4>&nbsp;&nbsp;Area = (b - a) * (yMax - yMin )</h4>
-      <div class="row">
-        Área del rectángulo = &nbsp;<span id="areaRectangulo"></span>
-      </div>
+      <p class="row">
+        Área del rectángulo = &nbsp;<span id="areaRectangulo" class="bold"></span>
+      </p>
 
       <!-- Disparos dentro del area -->
       <h3>Paso 4: Calcular la cantidad de disparos dentro del área.</h3>
-      <div class="row">
-        Disparos dentro del área = &nbsp;<span id="disparosEnArea"></span>
-      </div>
+      <p class="row">
+        Disparos en área positiva = &nbsp;<span id="disparosEnAreaPositiva" class="bold"></span>
+      </p>
+      <p class="row">
+        Disparos en área negativa = &nbsp;<span id="disparosEnAreaNegativa" class="bold"></span>
+      </p>
+      <p class="row">
+        Disparos en el área total = &nbsp;<span id="disparosEnArea" class="bold"></span>
+      </p>
 
       <!-- Integral aproximada -->
       <h3>Paso 5: Calcular la estimación de la integral definida.</h3>
@@ -85,9 +91,9 @@
         &nbsp;&nbsp;Area = [(disparosEnArea / disparosTotal) * (b-a)] * (yMax -
         yMin)
       </h4>
-      <div class="row respuesta">
-        Integral definida estimada = &nbsp;<span id="integralDefinida"></span>
-      </div>
+      <p class="row respuesta">
+        Integral definida estimada = &nbsp;<span id="integralDefinida" class="bold"></span>
+      </p>
 
       <!-- Gráfico de montecarlo -->
       <h3>Paso 6: Gráfico del f(x) con los puntos disparados</h3>

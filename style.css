@@ -49,7 +49,7 @@ input {
   display: flex;
   justify-content: center;
   text-align: justify;
-  margin: auto;
+  margin: 1rem;
 }
 
 .column {
@@ -97,9 +97,15 @@ input {
   font-weight: bold;
   color: #41963b;
 }
+
 .showResult {
   display: block;
 }
+
 .hideResult {
   display: none;
+}
+
+.bold {
+  font-weight: bold;
 }
